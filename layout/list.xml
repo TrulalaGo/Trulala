@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<LinearLayout
+  android:orientation="horizontal">
+  <LinearLayout
+    android:orientation="vertical">
+  </LinearLayout>
+  <LinearLayout>
+    <ListView/>
+  </LinearLayout>
+</LinearLayout>
