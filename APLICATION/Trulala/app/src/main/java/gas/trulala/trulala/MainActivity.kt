@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.widget.*
 import java.io.File
 import android.view.View
+import android.net.Uri
 import android.content.Intent
+import android.provider.DocumentsContract
+import android.content.ContentResolver
 import android.widget.Toast
 
-public class MainActivity : AppCompatActivity() {
+ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,21 +33,58 @@ public class MainActivity : AppCompatActivity() {
         }
         val editin = findViewById<EditText>(R.id.editin)
         val koreksi = findViewById<TextView>(R.id.koreksi)
-        val gd = findViewById<Button>(R.id.gradle)
-        val bo = findViewById<Button>(R.id.buildozer)
-        val py = findViewById<Button>(R.id.python)
-        val kt = findViewById<Button>(R.id.kotlin)
-        val kodej = findViewById<Button>(R.id.java)
-        val js = findViewById<Button>(R.id.javascript)
-        val html = findViewById<Button>(R.id.html)
-        val cc = findViewById<Button>(R.id.cc)
-        gd.setOnClickListener{}
-        bo.setOnClickListener{}
-        py.setOnClickListener{}
-        kt.setOnClickListener{}
-        kodej.setOnClickListener{}
-        js.setOnClickListener{}
-        html.setOnClickListener{}
-        cc.setOnClickListener{}
-   }
-}
+
+        setupButton(findViewById(R.id.gradle))
+        setupButton(findViewById(R.id.buildozer))
+        setupButton(findViewById(R.id.python))
+        setupButton(findViewById(R.id.kotlin))
+        setupButton(findViewById(R.id.java))
+        setupButton(findViewById(R.id.javascript))
+        setupButton(findViewById(R.id.html))
+        setupButton(findViewById(R.id.cc))
+    }
+
+    private fun setupButton(button: Button) {
+        button.setOnClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            startActivityForResult(intent, REQUEST_CODE_PICK_FOLDER)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_PICK_FOLDER && resultCode == RESULT_OK) {
+            val folderUri: Uri? = data?.data
+            folderUri?.let { uri ->
+            contentResolver.takePersistableUriPermission(
+            uri,
+            Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            )
+            }
+        }
+    }
+
+    private fun saveFileToFolder(folderUri: Uri, fileName: String, fileData: ByteArray) {
+        try {
+            val docUri = DocumentsContract.createDocument(
+                contentResolver,
+                folderUri,
+                "application/octet-stream",
+                fileName
+            )
+
+            docUri?.let {
+                contentResolver.openOutputStream(it)?.use { outputStream ->
+                    outputStream.write(fileData)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CODE_PICK_FOLDER = 1
+    }
+ }
