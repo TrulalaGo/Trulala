@@ -34,42 +34,50 @@
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="GRADLE" />
+                 android:text="GRADLE"
+                 android:id="@+id/gradle" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="BUILDOZER" />
+                 android:text="BUILDOZER"
+                 android:id="@+id/buildozer" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="PYTHON" />
+                 android:text="PYTHON"
+                 android:id="@+id/python" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="KOTLIN" />
+                 android:text="KOTLIN"
+                 android:id="@+id/kotlin" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="JAVA" />
+                 android:text="JAVA"
+                 android:id="@+id/java" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="JAVA SCRIPT" />
+                 android:text="JAVA SCRIPT"
+                 android:id="@+id/javascript" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="HTML" />
+                 android:text="HTML"
+                 android:id="@+id/html" />
 
             <Button
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:text="C/C++" />
+                 android:text="C/C++"
+                 android:id="@+id/cc" />
 
         </GridLayout>
 
@@ -81,18 +89,49 @@
          android:background="#AADAAD"
          android:orientation="vertical">
 
-        <Button
+        <LinearLayout
              android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:id="@+id/menubtn"
-             android:text="menu" />
+             android:layout_width="match_parent"
+             android:background="#0000EE"
+             android:orientation="horizontal">
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:layout_marginRight="20dp"
+                 android:id="@+id/menubtn"
+                 android:text="MENU" />
+
+            <LinearLayout
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:gravity="center_horizontal">
+
+                <Button
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:layout_margin="5dp"
+                     android:text="simpan"
+                     android:id="@+id/simpan" />
+
+                <Button
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:layout_margin="5dp"
+                     android:text="mulai"
+                     android:id="@+id/mulai" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
              android:layout_height="wrap_content"
              android:layout_width="match_parent"
              android:background="#000000"
              android:layout_margin="5dp"
-             android:text="info:" />
+             android:text="info:"
+             android:id="@+id/koreksi" />
 
         <LinearLayout
              android:layout_height="match_parent"
@@ -102,7 +141,8 @@
 
             <ScrollView
                  android:layout_height="match_parent"
-                 android:layout_width="match_parent">
+                 android:layout_width="match_parent"
+                 android:layout_margin="5dp">
 
                 <EditText
                      android:layout_height="match_parent"
