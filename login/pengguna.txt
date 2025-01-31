@@ -1,0 +1,6 @@
+name = TrulalaGo
+perusahaan = TrulalaGo
+pengguna = pengguna
+
+username = admin123
+password = admin123
